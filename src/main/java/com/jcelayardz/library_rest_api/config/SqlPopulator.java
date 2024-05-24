@@ -17,8 +17,8 @@ public class SqlPopulator {
         return args -> {
             var populator = new ResourceDatabasePopulator();
             populator.addScripts(
-                    new ClassPathResource("schema.sql"),
-                    new ClassPathResource("sample-data.sql")
+                    new ClassPathResource("sql/schema.sql"),
+                    new ClassPathResource("sql/sample-data.sql")
             );
             DatabasePopulatorUtils.execute(populator, dataSource);
         };
