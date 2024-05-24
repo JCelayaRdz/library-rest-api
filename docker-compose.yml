@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   api:
-    container_name: library-ret-api
+    container_name: library-rest-api
     build: .
     ports:
       - 8080:8080
@@ -12,6 +12,8 @@ services:
     environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
+    depends_on:
+      - database
 
   database:
     container_name: mysql-server
