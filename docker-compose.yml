@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: library-ret-api
+    build: .
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    networks:
+      - api-network
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+
+  database:
+    container_name: mysql-server
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - api-data:/var/lib/mysql
+    networks:
+      - api-network
+    environment:
+      MYSQL_DATABASE: library-rest-api
+      MYSQL_ROOT_PASSWORD: password
+
+volumes:
+  api-data:
+
+networks:
+  api-network:
+    driver: bridge
